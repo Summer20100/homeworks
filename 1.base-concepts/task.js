@@ -30,7 +30,13 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   const monthlyPayment = S * (P + (P / (Math.pow((1 + P), n) - 1)));
   totalAmount = Math.round((monthlyPayment * n) * 100) / 100;
 
-  if (Object.is(totalAmount, NaN)) totalAmount = 'Введите срок ипотеки';
+  if (isNaN(percent)) {
+    return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
+  } else if (isNaN(contribution)) {
+    return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
+  } else if (isNaN(amount)) {
+    return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
+  }
 
   return totalAmount;
 }
